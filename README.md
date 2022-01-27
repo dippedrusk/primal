@@ -5,6 +5,7 @@ Quick (one-evening) implementation of Wordle for 5-digit primes in Python, for c
 ## Features
 - Has a daily version (`--daily` flag) and an ad hoc version (default)
 - Has the option to let you only input prime numbers instead of any 5-digit natural numbers (`--only-primes` flag)
+- Nonvisual mode for playing without visual cues / with a screenreader (`--nonvisual` flag)
 - Generates alt text / image descriptions if you're going to share to Twitter
 - Pretty ANSI colours
 

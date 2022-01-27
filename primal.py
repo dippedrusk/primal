@@ -7,6 +7,7 @@ from enum import Enum
 parser = argparse.ArgumentParser(description='Wordle but with prime numbers')
 parser.add_argument('--only-primes', action='store_true')
 parser.add_argument('--daily', action='store_true')
+parser.add_argument('--nonvisual', action='store_true')
 
 class Stat(Enum):
     MISS = '-'
@@ -107,7 +108,10 @@ def print_total_stats(total_stats, date):
         print(''.join([colourize(stat, f' {stat.value} ') for stat in line]))
     print()
 
-def print_guess(guess, stats):
+def print_guess(guess, stats, nonvisual):
+    if nonvisual:
+        print(''.join([stat.value for stat in stats]))
+        return
     string = ''
     for digit, stat in zip(str(guess), stats):
         string += colourize(stat, f'[{digit}]') + ' '
@@ -127,13 +131,13 @@ def get_guess(only_primes):
         except AssertionError as err:
             print(err)
 
-def game(target, only_primes):
+def game(target, only_primes, nonvisual):
     total_stats = []
     for _ in range(6):
         guess = get_guess(only_primes)
         stats = compute_stats(guess, target)
         total_stats.append(stats)
-        print_guess(guess, stats)
+        print_guess(guess, stats, nonvisual)
         if guess == target:
             print('You win!')
             break
@@ -151,7 +155,7 @@ def main():
 
     target = random.choice(primes)
 
-    total_stats = game(target, args.only_primes)
+    total_stats = game(target, args.only_primes, args.nonvisual)
     print_total_stats(total_stats, game_type)
 
 if __name__ == "__main__":
