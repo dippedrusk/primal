@@ -101,7 +101,7 @@ def colourize(stat, text):
 def print_total_stats(total_stats, date):
     print(f'PRIMAL {date} {len(total_stats)}/6')
     for i, line in enumerate(total_stats):
-        print(f'Line {i}:', describe_line(line))
+        print(f'Line {i+1}:', describe_line(line))
     print()
     print(f'PRIMAL {date} {len(total_stats)}/6')
     for line in total_stats:
